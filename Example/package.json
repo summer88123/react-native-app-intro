@@ -10,9 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/viewpager": "3.3.0",
     "react": "16.9.0",
     "react-native": "0.61.2",
-    "rn-falcon-app-intro": "1.2.8"
+    "rn-falcon-app-intro": "../"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

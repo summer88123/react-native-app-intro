@@ -1,18 +1,17 @@
 {
-  "name": "rn-falcon-app-intro",
-  "version": "1.2.9",
-  "description": "rn-falcon-app-intro is a react native plugin implementing a parallax effect welcome page using base on react-native-swiper , similar to the one found in Google's app like Sheet, Drive, Docs...",
+  "name": "react-native-app-intro",
+  "version": "0.0.1",
+  "description": "an app intro with parallax animate, base on @react-native-community/viewpager.",
   "main": "AppIntro.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Richi2293/rn-falcon-app-intro.git"
+    "url": "git+https://github.com/summer88123/react-native-app-intro.git"
   },
   "keywords": [
-    "swiper",
-    "ProductTour",
+    "viewpager",
     "App",
     "Intro",
     "ios",
@@ -23,13 +22,13 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Richi2293/rn-falcon-app-intro/issues"
+    "url": "https://github.com/summer88123/react-native-app-intro/issues"
   },
-  "homepage": "https://github.com/Richi2293/rn-falcon-app-intro#readme",
+  "homepage": "https://github.com/summer88123/react-native-app-intro#readme",
   "dependencies": {
+    "@react-native-community/viewpager": "3.3.0",
     "assign-deep": "^0.4.5",
-    "prop-types": "^15.5.8",
-    "react-native-swiper": "^1.6.0-nightly.5"
+    "prop-types": "^15.5.8"
   },
   "devDependencies": {
     "react-test-renderer": "16.6.3"

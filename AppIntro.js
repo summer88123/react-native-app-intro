@@ -126,6 +126,7 @@ export default class AppIntro extends Component {
         rightTextColor: PropTypes.string,
         leftTextColor: PropTypes.string,
         onSlideChange: PropTypes.func,
+        onPageScroll: PropTypes.func,
         onSkipBtnClick: PropTypes.func,
         onDoneBtnClick: PropTypes.func,
         onNextBtnClick: PropTypes.func,
@@ -161,6 +162,8 @@ export default class AppIntro extends Component {
         leftTextColor: '#fff',
         pageArray: [],
         onSlideChange: () => {
+        },
+        onPageScroll: () => {
         },
         onSkipBtnClick: () => {
         },

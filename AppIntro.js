@@ -94,6 +94,7 @@ const defaulStyles = {
         alignItems: 'center',
     },
     btnContainer: {
+        flex: 0.3,
         justifyContent: 'center',
         alignItems: 'center',
         height: 80,

@@ -203,31 +203,20 @@ export default class AppIntro extends Component {
         this.props.onNextBtnClick(this.state.curPosition + 1);
     }
 
-    getTransform = (index, offset, level) => {
+    getTransform = (index, level) => {
         const value = index === this.state.curPosition ? this.state.parallax : this.state.otherParallax;
-        const statRange = -1;
-        const endRange = 1;
-        const startOpacity = 1;
-        const endOpacity = 1;
-        const leftPosition = (offset * level);
-        const rightPosition = -(offset * level);
-        const transform = [{
+        const leftPosition = level;
+        const rightPosition = -level;
+        return {
             transform: [
                 {
                     translateX: value
                         .interpolate({
-                            inputRange: [statRange, endRange],
+                            inputRange: [-1, 1],
                             outputRange: [rightPosition, leftPosition],
                         }),
                 }],
-        }, {
-            opacity: value.interpolate({
-                inputRange: [statRange, 0, endRange], outputRange: [startOpacity, 1, endOpacity],
-            }),
-        }];
-        return {
-            transform,
-        };
+        }
     }
 
     renderPagination = (index, total) => {
@@ -274,7 +263,7 @@ export default class AppIntro extends Component {
 
     renderChild = (children, pageIndex, index) => {
         const level = children.props.level || 0;
-        const {transform} = this.getTransform(pageIndex, 10, level);
+        const {transform} = this.getTransform(pageIndex, level);
         const root = children.props.children;
         let nodes = children;
         if (Array.isArray(root)) {

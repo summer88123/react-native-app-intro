@@ -1,7 +1,7 @@
 import assign from 'assign-deep';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, Dimensions, StatusBar, StyleSheet, View, } from 'react-native';
+import { Animated, Dimensions, Platform, StatusBar, StyleSheet, View } from 'react-native';
 import ViewPager from "@react-native-community/viewpager";
 import DoneButton from './components/DoneButton';
 import SkipButton from './components/SkipButton';
@@ -116,7 +116,8 @@ const defaulStyles = {
     },
     viewPager: {
         flex: 1
-    }
+    },
+    hidden: {overflow: 'hidden'}
 }
 
 export default class AppIntro extends Component {
@@ -264,7 +265,7 @@ export default class AppIntro extends Component {
 
     renderChild = (children, pageIndex, index) => {
         const level = children.props.level || 0;
-        const {transform} = this.getTransform(pageIndex, level);
+        const transform = this.getTransform(pageIndex, level);
         const root = children.props.children;
         let nodes = children;
         if (Array.isArray(root)) {
@@ -273,13 +274,13 @@ export default class AppIntro extends Component {
         let animatedChild = children;
         if (level !== 0) {
             animatedChild = (
-                <Animated.View key={index} style={[children.props.style, transform]}>
+                <Animated.View key={index} style={[children.props.style, transform, this.styles.hidden]}>
                     {nodes}
                 </Animated.View>
             );
         } else {
             animatedChild = (
-                <View key={index} style={children.props.style}>
+                <View key={index} style={[children.props.style, this.styles.hidden]}>
                     {nodes}
                 </View>
             );
@@ -306,13 +307,24 @@ export default class AppIntro extends Component {
     onPageScroll = ({nativeEvent: {offset = 0, position = 0} = {}} = {}) => {
         const {curPosition} = this.state;
         let value, otherValue;
-        if (position === curPosition) {
-            value = -offset;
-            otherValue = 1 - offset;
-        } else {
-            value = 1 - offset;
-            otherValue = -offset
+        if (Platform.OS === 'android') {
+            if (position === curPosition) {
+                value = -offset;
+                otherValue = 1 - offset;
+            } else {
+                value = 1 - offset;
+                otherValue = -offset
+            }
+        } else if (Platform.OS === 'ios') {
+            if (offset >= 0) {
+                value = -offset;
+                otherValue = 1 - offset;
+            } else {
+                value = -offset;
+                otherValue = -offset - 1;
+            }
         }
+
         this.state.parallax.setValue(value);
         this.state.otherParallax.setValue(otherValue);
         // this.parallaxEvent(value)

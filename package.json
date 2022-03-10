@@ -26,11 +26,14 @@
   },
   "homepage": "https://github.com/summer88123/react-native-app-intro#readme",
   "dependencies": {
-    "@react-native-community/viewpager": "3.3.0",
     "assign-deep": "^0.4.5",
     "prop-types": "^15.5.8"
   },
   "devDependencies": {
-    "react-test-renderer": "16.6.3"
+    "react-test-renderer": "16.6.3",
+    "react-native-pager-view": "^5.4.11"
+  },
+  "peerDependencies": {
+    "react-native-pager-view": "^5.4.11"
   }
 }

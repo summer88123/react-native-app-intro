@@ -2,7 +2,7 @@ import assign from 'assign-deep';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Dimensions, Platform, StatusBar, StyleSheet, View } from 'react-native';
-import ViewPager from "@react-native-community/viewpager";
+import PagerView from "react-native-pager-view";
 import DoneButton from './components/DoneButton';
 import SkipButton from './components/SkipButton';
 import RenderDots from './components/Dots';
@@ -346,7 +346,7 @@ export default class AppIntro extends Component {
                 width: this.props.width,
             }}>
                 <StatusBar translucent={true} backgroundColor={'rgba(0,0,0,0.2)'}/>
-                <ViewPager
+                <PagerView
                     ref={this.refScrollView}
                     loop={false}
                     style={this.styles.viewPager}
@@ -357,7 +357,7 @@ export default class AppIntro extends Component {
                     onPageScroll={this.onPageScroll}
                 >
                     {pages}
-                </ViewPager>
+                </PagerView>
                 {this.renderPagination(curPosition, count)}
             </View>
         );

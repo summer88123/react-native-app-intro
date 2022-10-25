@@ -224,6 +224,7 @@ export default class AppIntro extends Component {
     renderPagination = (index, total) => {
         let isDoneBtnShow = index === total - 1;
         let isSkipBtnShow = !isDoneBtnShow;
+        let isOnlyOnePic = isDoneBtnShow && index === 0;
         return (
             <View style={[this.styles.paginationContainer]}>
                 {this.props.showSkipButton ?
@@ -254,6 +255,7 @@ export default class AppIntro extends Component {
                             {...this.state}
                             isDoneBtnShow={isDoneBtnShow}
                             styles={this.styles}
+                            isOnlyOnePic={isOnlyOnePic}
                             onNextBtnClick={this.onNextBtnClick}/>
                     </View>
                     :

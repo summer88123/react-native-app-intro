@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const value = new Animated.Value(0);
-
 export const DoneButton = ({
                                styles, onDoneBtnClick, onNextBtnClick,
-                               rightTextColor, isDoneBtnShow,
+                               rightTextColor, isDoneBtnShow,isOnlyOnePic,
                                doneBtnLabel, nextBtnLabel,useNativeDriver
                            }) => {
+    
+    const value = new Animated.Value(isOnlyOnePic ? 1 : 0);
     const [doneFadeOpacity] = useState(value);
     const [showDone, setShowDone] = useState(isDoneBtnShow)
     if (showDone !== isDoneBtnShow) {

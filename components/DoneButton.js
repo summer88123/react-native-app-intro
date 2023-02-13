@@ -34,11 +34,13 @@ export const DoneButton = ({
                     style={styles.full}
                     onPress={isDoneBtnShow ? onDoneBtnClick : onNextBtnClick}
                 >
-                    <Text style={[styles.controllText, {
+                    <View style={styles.doneBtnBackView}>
+                            <Text style={[styles.controllText, {
                         color: rightTextColor,
                     }]}>
                         {doneBtnLabel}
                     </Text>
+                        </View>
                 </TouchableOpacity>
             </Animated.View>
             {showDone ? null : (
@@ -51,9 +53,9 @@ export const DoneButton = ({
                         style={styles.full}
                         onPress={onNextBtnClick}
                     >
-                        <Text style={[styles.nextButtonText, {color: rightTextColor}]}>
-                            {nextBtnLabel}
-                        </Text>
+                            <Text style={[styles.nextButtonText, {color: rightTextColor}]}>
+                                {nextBtnLabel}
+                            </Text>
                     </TouchableOpacity>
                 </Animated.View>
             )}

@@ -87,6 +87,15 @@ const defaulStyles = {
         flexDirection: 'row',
         flex: 1,
     },
+    paginationTopContainer: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 25,
+        flexDirection: 'row',
+        flex: 1,
+    },
+    doneBtnBackView:{},
     dotContainer: {
         flex: 0.6,
         flexDirection: 'row',
@@ -154,7 +163,8 @@ export default class AppIntro extends Component {
         width: PropTypes.number,
         height: PropTypes.number,
         flexContainer: PropTypes.number,
-        useNativeDriver: PropTypes.bool
+        useNativeDriver: PropTypes.bool,
+        showPaginationTop: PropTypes.bool
     };
 
     static defaultProps = {
@@ -184,7 +194,8 @@ export default class AppIntro extends Component {
         width: windowsWidth,
         height: windowsHeight,
         flexContainer: 1,
-        useNativeDriver: true
+        useNativeDriver: true,
+        showPaginationTop: false
     };
 
     constructor(props) {
@@ -221,13 +232,49 @@ export default class AppIntro extends Component {
         }
     }
 
+    renderTopPagination = (index, total) => {
+        let isDoneBtnShow = index === total - 1;
+        let isSkipBtnShow = !isDoneBtnShow;
+        let isOnlyOnePic = isDoneBtnShow && index === 0;
+        return (
+            <View style={[this.styles.paginationTopContainer]}>
+                {this.props.showSkipButton && this.props.showPaginationTop ?
+                    <View style={this.styles.viewSkip}>
+                        <SkipButton
+                            {...this.props}
+                            {...this.state}
+                            isSkipBtnShow={isSkipBtnShow}
+                            styles={this.styles}
+                            onSkipBtnClick={() => this.props.onSkipBtnClick(index)}
+                        />
+                    </View>
+                    :
+                    <View style={this.styles.btnContainer}/>
+                }
+                    <View style={this.styles.viewDots}/>
+                {this.props.showDoneButton && this.props.showPaginationTop ?
+                    <View style={this.styles.viewDoneButton}>
+                        <DoneButton
+                            {...this.props}
+                            {...this.state}
+                            isDoneBtnShow={isDoneBtnShow}
+                            styles={this.styles}
+                            isOnlyOnePic={isOnlyOnePic}
+                            onNextBtnClick={this.onNextBtnClick}/>
+                    </View>
+                    :
+                    <View style={this.styles.btnContainer}/>
+                }
+            </View>)
+    };
+
     renderPagination = (index, total) => {
         let isDoneBtnShow = index === total - 1;
         let isSkipBtnShow = !isDoneBtnShow;
         let isOnlyOnePic = isDoneBtnShow && index === 0;
         return (
             <View style={[this.styles.paginationContainer]}>
-                {this.props.showSkipButton ?
+                {this.props.showSkipButton && !this.props.showPaginationTop ?
                     <View style={this.styles.viewSkip}>
                         <SkipButton
                             {...this.props}
@@ -248,7 +295,7 @@ export default class AppIntro extends Component {
                         })}
                     </View>
                     : null}
-                {this.props.showDoneButton ?
+                {this.props.showDoneButton && !this.props.showPaginationTop ?
                     <View style={this.styles.viewDoneButton}>
                         <DoneButton
                             {...this.props}
@@ -361,6 +408,7 @@ export default class AppIntro extends Component {
                     {pages}
                 </PagerView>
                 {this.renderPagination(curPosition, count)}
+                {this.props.showPaginationTop && this.renderTopPagination(curPosition, count)}
             </View>
         );
     }
